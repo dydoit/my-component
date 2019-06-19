@@ -1,25 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <nav>
+      <h3>组件</h3>
+      <ul>
+        <router-link tag="li" to="/form">form</router-link>
+        <router-link tag="li" to="/input">input系列</router-link>
+        <router-link tag="li" to="/tree">树形菜单</router-link>
+      </ul>
+    </nav>
+    <router-view class="comp-view"></router-view>
   </div>
 </template>
 <style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
+#app 
+  width 80%
+  margin 20px auto
+  display flex
+  justify-content space-between
+nav 
+  width 180px
+  border 1px solid #ccc;
   text-align center
-  color #2c3e50
-
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+  h3
+    padding 0 10px
+    line-height 40px
+    text-align left
+li
+  line-height 40px
+  list-style none
+  cursor pointer
+.comp-view 
+  flex 1
+  margin-left 40px
 </style>
