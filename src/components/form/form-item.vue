@@ -1,6 +1,6 @@
 <template>
   <div class="dy-form-item">
-    <label for="">{{name}}</label>
+    <label for="">{{label}}</label>
     <slot></slot>
     <p v-if="errMsg" style="color:red">{{errMsg}}</p>
   </div>
@@ -11,7 +11,7 @@
   export default {
     name: 'DyFormItem',
     props: {
-      name: String,
+      label: String,
       rules: [Object, Array]
     },
     data(){

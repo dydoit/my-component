@@ -1,6 +1,6 @@
 <template>
-  <ul class="tree" v-if="list.length">
-    <li v-for="item of list" :key="item.id">
+  <ul class="tree" v-if="data.length">
+    <li v-for="item of data" :key="item.id">
       <span v-if="item.children" @click="item.isSpread=!item.isSpread" :class="item.isSpread?'is-spread':''">+</span><a href="javascript:;">{{item.text}}</a>
       <Tree :list="item.children" v-show="item.isSpread"/>
     </li>
@@ -15,6 +15,11 @@
         default(){
           return []
         }
+      }
+    },
+    data () {
+      return {
+        data: this.list.slice()
       }
     }
   }

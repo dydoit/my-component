@@ -1,5 +1,5 @@
 <template>
-  <input :type="type" :name="inputName" :value="value" @input="$emit('input', $event.target.value)" 
+  <input :type="type" :name="inputName" :value="value" @input="inputHandler" 
   @blur="vali"
   @focus="resetVali"
   >
@@ -27,6 +27,9 @@
       },
       resetVali(){
         this.$parent.resetVali()
+      },
+      inputHandler(e){
+        console.log(e)
       }
     },
   }

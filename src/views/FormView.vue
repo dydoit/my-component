@@ -1,10 +1,10 @@
 <template>
-  <dy-form>
-    <dy-form-item :name="labelName1" :rules="rules[0]">
-      <dy-form-input :type="'text'" :input-name="inputName1" v-model="username"></dy-form-input>
+  <dy-form :model="ruleForm">
+    <dy-form-item label="用户名">
+      <dy-form-input type="'text'" :input-name="inputName1" v-model="ruleForm.username"></dy-form-input>
     </dy-form-item>
-     <dy-form-item :name="labelName2" :rules="rules[1]">
-      <dy-form-input :type="'password'" :input-name="inputName2" v-model="password"></dy-form-input>
+     <dy-form-item label="密码">
+      <dy-form-input type="'password'" :input-name="inputName2" v-model="ruleForm.pwd"></dy-form-input>
     </dy-form-item>
   </dy-form>
 </template>
@@ -17,6 +17,10 @@ import DyFormInput from '@/components/form/form-input.vue'
     name: 'Form',
     data () {
       return {
+        ruleForm: {
+          username: '',
+          pwd: ''
+        },
         labelName1: '用户名',
         labelName2: '密码',
         inputName1: 'username',
