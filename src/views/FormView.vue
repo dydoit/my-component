@@ -1,11 +1,13 @@
 <template>
-  <dy-form :model="ruleForm">
-    <dy-form-item label="用户名">
-      <dy-form-input type="'text'" :input-name="inputName1" v-model="ruleForm.username"></dy-form-input>
+  <dy-form :model="ruleForm" :rules="rules" ref="loginForm">
+    <!-- prop用于校验 -->
+    <dy-form-item label="用户名" prop="username">
+      <dy-form-input type="'text'"  v-model="ruleForm.username"></dy-form-input>
     </dy-form-item>
-     <dy-form-item label="密码">
-      <dy-form-input type="'password'" :input-name="inputName2" v-model="ruleForm.pwd"></dy-form-input>
+     <dy-form-item label="密码" prop="pwd">
+      <dy-form-input type="'password'"  v-model="ruleForm.pwd"></dy-form-input>
     </dy-form-item>
+    <button @click="login">登录</button>
   </dy-form>
 </template>
 
@@ -21,13 +23,7 @@ import DyFormInput from '@/components/form/form-input.vue'
           username: '',
           pwd: ''
         },
-        labelName1: '用户名',
-        labelName2: '密码',
-        inputName1: 'username',
-        inputName2: 'pwd',
-        username: '',
-        password: '',
-        rules: [
+        rules:
           {username: 
             [
               {
@@ -40,15 +36,25 @@ import DyFormInput from '@/components/form/form-input.vue'
               }
             ]
           },
-          {
-            pwd: [{
+           pwd: [{
               required: true,
               message: '请输入密码'
-            }]
-          }
-          ]
+          }]
         }
       },
+    methods: {
+      login() {
+        this.$refs.loginForm.validate(valid => {
+        console.log(valid)
+        if (valid) {
+          alert("提交登录！");
+        } else {
+          console.log("校验失败");
+          return false;
+        }
+      });
+      }
+    },
     components: {
       DyForm,
       DyFormItem,
@@ -58,6 +64,6 @@ import DyFormInput from '@/components/form/form-input.vue'
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
 
 </style>

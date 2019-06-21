@@ -1,8 +1,8 @@
 <template>
   <div class="dy-form-item">
-    <label for="">{{label}}</label>
+    <label>{{label}}</label>
     <slot></slot>
-    <p v-if="errMsg" style="color:red">{{errMsg}}</p>
+    <p v-if="validateStatus == 'error'" class="error">{{errMsg}}</p>
   </div>
 </template>
 
@@ -10,33 +10,53 @@
   import Schema from 'async-validator'
   export default {
     name: 'DyFormItem',
+    inject: ['form'],
     props: {
       label: String,
-      rules: [Object, Array]
+      prop: String
     },
     data(){
       return {
-        errMsg: ''
+        errMsg: '',
+        validateStatus: ''
+      }
+    },
+    mounted() {
+      if (this.prop) {
+        this.$parent.$emit('formItemAdd', this)
       }
     },
     methods: {
-      valid(val) {
-        const validator = new Schema(this.rules)
-        validator.validate(val, errs=>{
-          console.log(errs)
-          if(errs.length) {
-            this.errMsg = errs[0].message
+      validate() {
+        return new Promise(resolve => {
+          const descriptor = {
+            [this.prop]: this.form.rules[this.prop]
           }
+          const validator = new Schema(descriptor);
+          validator.validate({[this.prop]: this.form.model[this.prop]}, errors => {
+            if (errors) {
+              this.validateStatus = "error"
+              this.errMsg = errors[0].message
+              resolve(false)
+            } else {
+              this.errMsg = ''
+              this.validateStatus = ''
+              resolve(true)
+            }
+          })
         })
       },
       resetVali(){
         this.errMsg = ''
+        this.validateStatus = ''
       }
     },
     
   }
 </script>
 
-<style lang="scss" scoped>
-
+<style lang="stylus" scoped>
+.error {
+  color: #f00;
+}
 </style>

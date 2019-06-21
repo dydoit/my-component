@@ -1,6 +1,6 @@
 <template>
-  <input :type="type" :name="inputName" :value="value" @input="inputHandler" 
-  @blur="vali"
+  <input :type="type" :value="inputValue" @input="inputHandler" 
+  @blur="validate"
   @focus="resetVali"
   >
 </template>
@@ -13,28 +13,28 @@
         type: String,
         default: 'text'
       },
-      inputName: String,
       value: String
     },
     data(){
       return {
-        
+        inputValue: this.value
       }
     },
     methods: {
-      vali() {
-       this.$parent.valid({[this.inputName]: this.value})
+      validate() {
+       this.$parent.validate()
       },
       resetVali(){
         this.$parent.resetVali()
       },
       inputHandler(e){
-        console.log(e)
+        this.inputValue = e.target.value
+        this.$emit('input', this.inputValue)
       }
     },
   }
 </script>
 
-<style lang="scss" scoped>
+<style lang="stylus" scoped>
 
 </style>
