@@ -2,9 +2,10 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import Util from './utiles/index'
 import '@/styles/reset.styl'
 Vue.config.productionTip = false
-
+Vue.use(Util)
 new Vue({
   router,
   store,

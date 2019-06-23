@@ -15,6 +15,9 @@
       label: String,
       prop: String
     },
+    created () {
+      this.$on('validate', this.validate)
+    },
     data(){
       return {
         errMsg: '',
@@ -23,7 +26,8 @@
     },
     mounted() {
       if (this.prop) {
-        this.$parent.$emit('formItemAdd', this)
+        this.$dispatch('DyForm', 'formItemAdd', [this], this)
+        
       }
     },
     methods: {
@@ -32,6 +36,7 @@
           const descriptor = {
             [this.prop]: this.form.rules[this.prop]
           }
+          console.log(this.form.rules)
           const validator = new Schema(descriptor);
           validator.validate({[this.prop]: this.form.model[this.prop]}, errors => {
             if (errors) {

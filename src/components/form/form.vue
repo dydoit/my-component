@@ -20,11 +20,12 @@
       this.fields = []
       this.$on("formItemAdd", item => this.fields.push(item))
     },
+    mounted() {
+      console.log(this.fields)
+    },
     methods: {
       async validate(callback) {
-        
         const tasks = this.fields.map(item => item.validate())
-        debugger
         const results = await Promise.all(tasks)
         let ret = true
         results.forEach(valid => {

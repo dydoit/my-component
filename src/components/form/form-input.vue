@@ -22,7 +22,7 @@
     },
     methods: {
       validate() {
-       this.$parent.validate()
+       this.$dispatch('DyFormItem', 'validate', [], this)
       },
       resetVali(){
         this.$parent.resetVali()
