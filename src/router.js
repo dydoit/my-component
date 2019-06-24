@@ -21,6 +21,11 @@ export default new Router({
       path: '/tree',
       name: 'tree',
       component: () => import('./views/TreeView.vue')
+    },
+    {
+      path: '/modal',
+      name: 'modal',
+      component: () => import('./views/TreeView.vue')
     }
   ]
 })

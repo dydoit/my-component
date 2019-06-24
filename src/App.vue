@@ -6,6 +6,7 @@
         <router-link tag="li" to="/form">form</router-link>
         <router-link tag="li" to="/input">input系列</router-link>
         <router-link tag="li" to="/tree">树形菜单</router-link>
+        <router-link tag="li" to="/tree">模态框</router-link>
       </ul>
     </nav>
     <router-view class="comp-view"></router-view>
